@@ -1,0 +1,38 @@
+<%- include('../partials/head.ejs') %>
+
+<body>
+    <center>
+        <% if(alertMsg.length>1) { %>
+            <div class="alert alert-danger alert-dismissible fade show">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Sorry!</strong> <%= alertMsg %>
+            </div>
+            <% } %>
+        <br><p style="width: 700px" class="mytext"><%- title %></p><br>
+    <div class="mycontainer" style="width: 900px">
+        <br><br>
+        <form action="/auth/userLogin" method="POST">
+            <br>
+            <div class="mycontainer" style="width: 50%;">
+                <br>
+                <h4>Enter Your Roll Number</h4>
+                <input type="text" style="width: 420px" name="secretkey" class="myinput">
+                <br>
+            </div>
+            <br>
+            <br>
+            <div class="mycontainer" style="width: 50%;">
+                <br>
+                <h4>Enter Password</h4>
+                <input type="password" style="width: 420px" name="password" class="myinput">
+                <br>
+            </div>
+            <br><br><br>
+            <input type="submit" style="width: 200px; margin: 0 auto;" class="btn btn-success" value="Login">
+            <br><br>
+        </form>
+        <br><br>
+    </div>
+    <br><br>
+    </center>
+</body>

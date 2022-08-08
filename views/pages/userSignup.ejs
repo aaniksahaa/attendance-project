@@ -1,0 +1,32 @@
+<%- include('../partials/head.ejs') %>
+
+<body>
+    <center>
+        <br><p style="width: 700px" class="mytext"><%- title %></p><br>
+    <div class="mycontainer" style="width: 900px">
+        <br><br>
+        <form action="/auth/credentialsUserSignup" method="POST">
+            <br>
+            <div class="mycontainer" style="width: 50%;">
+                <br>
+                <h4>Enter Secret Key</h4>
+                <input type="text" style="width: 420px" name="secretkey" class="myinput">
+                <br>
+            </div>
+            <br>
+            <br>
+            <div class="mycontainer" style="width: 50%;">
+                <br>
+                <h4>Enter Password</h4>
+                <input type="password" style="width: 420px" name="password" class="myinput">
+                <br>
+            </div>
+            <br><br><br>
+            <input type="submit" style="width: 200px; margin: 0 auto;" class="btn btn-success" value="Sign-Up">
+            <br><br>
+        </form>
+        <br><br>
+    </div>
+    <br><br>
+    </center>
+</body>

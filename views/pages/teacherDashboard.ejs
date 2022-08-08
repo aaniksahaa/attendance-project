@@ -1,0 +1,64 @@
+<%- include('../partials/head.ejs') %>
+
+<body>
+    
+    <a href="/auth/logout" align="left" style="margin-left: 30px; margin-top: 10px; float: left;" class="btn btn-danger">Logout</a>
+     <p align="right" style="float: right; margin-right: 30px;" class="btn btn-success">Siddheswari Girls' College</p>
+    <div class="container">
+        
+        <div>
+            <button class="btn btn-outline-danger" style="float: right;">Teacher Dashboard</button>
+        </div>
+        <br>
+        
+    <center>
+        <div class="my-4">
+            <br><br>
+            <h4 style="margin-left: 30%; margin-right: 30%;">Maintain Attendance</h4>
+            <form action="/teacher/dashboard" class="form-inline" method="POST">
+                
+                <p class="mytime" style="margin-top:37px;" %>>8 August, 2022</p>&nbsp&nbsp&nbsp&nbsp
+                <h4 style="margin-top:20px;">Start Roll  </h3>
+                <input type="text" style="width: 220px" name="firstroll" class="myinput">
+                <h4 style="margin-top:20px;">&nbsp&nbsp&nbsp&nbspEnd Roll</h3>
+                <input type="text" style="width: 220px" name="lastroll" class="myinput">
+                
+
+                <input type="submit" class="btn btn-success" style="position:relative; right:-30px; top: 7px;" value="Submit">
+                
+            </form>
+        </div>
+    </center>
+
+    <center>
+        <div class="my-4">
+            <br><br>
+            <h4 style="margin-left: 30%; margin-right: 30%;">Students, Attention !!!</h4>
+            <form action="/teacher/dashboard/submitData" class="myform" method="POST">
+
+                
+                <input type="text" style="width: 420px" name="firstroll" class="myinput" value=<%= firstroll.toString() %> hidden>
+                
+                <input type="text" style="width: 420px" name="lastroll" class="myinput" value=<%= lastroll.toString() %> hidden>
+            
+
+                <% console.log(parseInt(firstroll));for(let i=parseInt(firstroll) ;i<=parseInt(lastroll) ;i++) {  %>
+                <div class="inputGroup">
+                    <% let str="";console.log(data[i-parseInt(firstroll)]);if(data[i-parseInt(firstroll)].attend==1){str="checked"}; console.log(str); %>
+                    <input id="<%= i.toString() %>" name="attendees" type="checkbox" value="<%= i.toString() %>"<%= str %>/>
+                    <label for="<%= i.toString() %>"><%= "23Sc" + i.toString() %></label>
+                </div>
+                <% } %>
+
+                <br><br>
+            <input type="submit" style="width: 200px; height: 50px; margin: 0 auto;" class="btn btn-success" value="Submit Attendance">
+            <br><br>
+                
+            </form>
+        </div>
+    </center>
+        
+    
+    <%- include('../partials/footer.ejs') %>
+  </body>
+</html>

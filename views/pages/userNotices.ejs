@@ -1,0 +1,109 @@
+<%- include('../partials/head.ejs') %>
+
+<body onload="setTimeout(scrollToRecent(), 5000)" >
+    <% urlify = function urlify(text) {
+        var urlRegex = /(https?:\/\/[^\s]+)/g; 
+        var matches = [...text.matchAll(urlRegex)]; 
+        return matches; } 
+        urlify2 = function urlify2(text) {
+             var urlRegex = /(https?:\/\/[^\s]+)/g;
+             return text.replace(urlRegex, function(url) {
+                 return '<a target="_blank" class="link" href="' + url + '">' + url + '</a>';
+         })
+  
+     }%>
+    <a href="/auth/logout" align="left" style="margin-left: 30px; margin-top: 10px; float: left;" class="btn btn-danger">Logout</a>
+     <p align="right" style="float: right; margin-right: 30px;" class="btn btn-success">Dhaka Medical College K-78</p>
+     <div class="container">
+        
+        <div>
+            <button class="btn btn-outline-success" style="float: right;">Acting As User</button>
+        </div>
+        <br>
+     <div>
+         <center>
+         <br><br><p class="mytext" style="width: 230px;"><%= newCount.toString() %></p>
+         </center>
+         <% if(pins.length>0) {%>
+            <br><br>
+        <h3 class="mytext" style="width: 190px">Pinned Notices</h3><br><br>
+            <% let L = pins.length; for(let i=L-1 ;i>=0 ;i--) { let r = i+1; %>
+                <% if(validstrings.includes(pins[i].batch)) { %>
+                <div class="mycontainer">
+                    &nbsp &nbsp &nbsp<p class="mytime" %>><%= pins[i].timestamp  %></p>
+                    
+                    <center>
+                    <div>
+                        <% if(urlify(pins[i].content).length>0) { %>
+                        
+                            <% if(pins[i].type == "Form Fillup") { %>
+                                <br><a target="_blank" class="a" href="<%= urlify(pins[i].content)[0][0] %>"><%- "<font color='yellow'>" + pins[i].batch + "</font> Please Fillup This Form By " + pins[i].time   %></a><br>
+                            <% } else{ %> 
+                            <br><a target="_blank" class="a" href="<%= urlify(pins[i].content)[0][0] %>"><%- "<font color='yellow'>" + pins[i].batch + "</font> Please Join " +  "<font color='aqua'>" + pins[i].subject + " " + pins[i].type +  "</font> " + " at " + pins[i].time %></a><br>
+                            <% } %> 
+                        
+                        <% } %> 
+                    <br><p class="mytext" style="text-align: left;"> <%- urlify2(pins[i].content).replace(/(?:\r\n|\r|\n)/g, '<br>') %> </p><br>
+                    <br>
+                    </div>
+                </center>
+                </div>
+            <% } %>
+            <% } %>
+      </div>
+    <% } %>
+        <div>
+            <br><br>
+            <h3 id="recent" class="mytext" style="width: 190px">Recent Notices</h3><br>
+            <center>
+                <br><p class="mytext" style="width: 230px;"><%= newCount.toString() %></p><br><br>
+            </center>
+                <% let L = notices.length; for(let i=0 ;i<L ;i++) { let r = i+1; %>
+                    <% if(validstrings.includes(notices[i].batch)) { %>
+                    <div class="mycontainer">
+                        &nbsp &nbsp &nbsp<p class="mytime"><%= notices[i].timestamp  %></p>
+                        
+                        
+                        <center>
+                        <div>
+                            <% if(urlify(notices[i].content).length>0) { %>
+                        
+                                <% if(notices[i].type == "Form Fillup") { %>
+    
+                                    <br><a target="_blank" class="a" href="<%= urlify(notices[i].content)[0][0] %>"><%- "<font color='yellow'>" + notices[i].batch + "</font> Please Fillup This Form By " + notices[i].time   %></a><br>
+                                <% } else{ %> 
+    
+                                <br><a target="_blank" class="a" href="<%= urlify(notices[i].content)[0][0] %>"><%- "<font color='yellow'>" + notices[i].batch + "</font> Please Join " +  "<font color='aqua'>" + notices[i].subject + " " + notices[i].type +  "</font> " + " at " + notices[i].time %></a><br>
+                                <% } %> 
+                            
+                            <% } %> 
+                        <br><p class="mytext" style="text-align: left;"> <%- urlify2(notices[i].content).replace(/(?:\r\n|\r|\n)/g, '<br>') %> </p><br>
+                        <br>
+                        </div>
+                    </center>
+                    </div>
+                <% } %>
+                <% } %>
+        </div>
+        <br>
+    </div>
+    <br>
+    <script>
+        if ( window.history.replaceState ) {
+          window.history.replaceState( null, null, window.location.href );
+        }
+        function showbox(e){
+            if(!confirm('Are You Sure You Want to Delete The Notice ?')){
+                e.preventDefault();
+            }
+        }
+        function scrollToRecent() {
+            document.getElementById('recent').scrollIntoView({
+            behavior: 'smooth'
+        })
+        }
+        
+    </script>
+    <%- include('../partials/footer.ejs') %>
+  </body>
+</html>
